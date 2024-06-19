@@ -42,6 +42,9 @@ set wrap
 " Always show status line
 set laststatus=2
 
+" Set width of tab to four characters
+set tabstop=4
+
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 " Delete trailing white space on save, useful for some filetypes ;)

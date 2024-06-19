@@ -1,4 +1,7 @@
-"Show the title
+" Set width of shifting tabs to 4
+set shiftwidth=4
+
+" Show the title
 set title
 
 " Current line is zero, the rest of the line numbers are relative to it

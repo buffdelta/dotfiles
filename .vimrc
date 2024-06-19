@@ -45,6 +45,10 @@ set laststatus=2
 " Set width of tab to four characters
 set tabstop=4
 
+" Backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" Set status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 " Delete trailing white space on save, useful for some filetypes ;)

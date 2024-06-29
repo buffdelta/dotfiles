@@ -1,3 +1,10 @@
+# Display weather at login
+# ? = begin of request
+# 0 = display current temp
+# u = display temp in Fahrenheit
+curl wttr.in/?0u
+echo "───────────────────────────────────────────────────────────────────────────────────────────"
+
 function git_branch() {
     if git rev-parse --is-inside-work-tree &> /dev/null; then
         branch=$(git branch --show-current)

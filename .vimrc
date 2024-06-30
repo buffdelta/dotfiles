@@ -52,7 +52,7 @@ set tabstop=4
 set backspace=indent,eol,start
 
 " Set status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c\ ASCII:\ %b
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()

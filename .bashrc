@@ -3,7 +3,13 @@
 # 0 = display current temp
 # u = display temp in Fahrenheit
 curl wttr.in/?0u
-echo "───────────────────────────────────────────────────────────────────────────────────────────"
+
+# Print horizontal barrier based off the size of the current terminal screen
+COLS=$(tput cols)
+for ((i = 0; i < COLS; i++)); do
+        echo -n "─";
+done
+
 
 function git_branch() {
     if git rev-parse --is-inside-work-tree &> /dev/null; then

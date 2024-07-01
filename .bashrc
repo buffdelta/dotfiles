@@ -1,3 +1,14 @@
+echo ""
+
+neofetch
+
+COLS=$(tput cols)
+for ((i = 0; i < COLS; i++)); do
+	echo -n "─";
+done
+
+echo ""
+
 # Display weather at login
 # ? = begin of request
 # 0 = display current temp
@@ -5,9 +16,8 @@
 curl wttr.in/?0u
 
 # Print horizontal barrier based off the size of the current terminal screen
-COLS=$(tput cols)
 for ((i = 0; i < COLS; i++)); do
-        echo -n "─";
+	echo -n "─";
 done
 
 

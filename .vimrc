@@ -1,3 +1,12 @@
+" Status line plugin format
+let g:lightline = {
+        \ 'colorscheme': 'srcery_drk',
+        \ 'active': {
+        \       'left': [ [ 'mode', 'paste' ],
+        \                         [ 'readonly', 'filename', 'charvalue', 'modified' ] ]
+        \       }
+        \ }
+
 " Set width of shifting tabs to 4
 set shiftwidth=4
 

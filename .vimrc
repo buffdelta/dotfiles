@@ -1,20 +1,25 @@
-" Status line plugin format
 let g:lightline = {
         \ 'colorscheme': 'srcery_drk',
         \ 'active': {
         \       'left': [ [ 'mode', 'paste' ],
-        \                         [ 'readonly', 'filename', 'charvalue', 'modified' ] ]
-        \       }
+        \                         [ 'readonly', 'filename', 'gitbranch', 'charvalue', 'modified' ] ]
+        \       },
+        \ 'inactive': {
+        \       'left': [ [ 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \       'gitbranch': 'FugitiveHead'
+        \ },
         \ }
 
-" Set width of shifting tabs to 4
-set shiftwidth=4
+" Backspace over everything
+set backspace=indent,eol,start
 
 " Show the title
 set title
 
-" Current line is zero, the rest of the line numbers are relative to it
-set relativenumber
+" Current line is current line number, the rest of the line numbers are relative to it
+set number relativenumber
 
 " Display a list of possible commands/attributes when tab is pressed
 set wildmenu
@@ -54,27 +59,8 @@ set wrap
 " Always show status line
 set laststatus=2
 
-" Set width of tab to four characters
+" How long is tab
 set tabstop=4
 
-" Backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-" Set status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c\ ASCII:\ %b
-
-" Delete trailing white space on save, useful for some filetypes ;)
-fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfun
-
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
+" How long is Shift-<, or Shift->
+set shiftwidth=4

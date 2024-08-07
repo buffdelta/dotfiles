@@ -64,3 +64,7 @@ set tabstop=4
 
 " How long is Shift-<, or Shift->
 set shiftwidth=4
+
+" If filetype is text or markdown, set spellcheck
+autocmd Filetype text setlocal spell
+autocmd Filetype markdown setlocal spell

@@ -1,3 +1,5 @@
+eval 'dircolors /home/christopher/.dir_colors/dircolors'
+
 echo ""
 
 neofetch

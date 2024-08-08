@@ -1,4 +1,4 @@
-eval 'dircolors /home/christopher/.dir_colors/dircolors'
+eval 'dircolors /home/christopher/.dir_colors/dircolors >/dev/null'
 
 echo ""
 

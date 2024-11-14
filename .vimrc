@@ -13,6 +13,7 @@ let g:lightline = {
         \ }
 
 map <C-w>t :tab terminal<CR>
+map <C-w>e :Lexplore<CR>
 
 " Since we are using lightline, this will disable prompts of which mode we are in
 set noshowmode

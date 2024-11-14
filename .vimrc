@@ -12,6 +12,11 @@ let g:lightline = {
         \ },
         \ }
 
+map <C-w>t :tab terminal<CR>
+
+" Since we are using lightline, this will disable prompts of which mode we are in
+set noshowmode
+
 " Backspace over everything
 set backspace=indent,eol,start
 
@@ -20,6 +25,9 @@ set title
 
 " Current line is current line number, the rest of the line numbers are relative to it
 set number relativenumber
+
+" Make number column default a width two
+set numberwidth=2
 
 " Display a list of possible commands/attributes when tab is pressed
 set wildmenu
@@ -55,6 +63,9 @@ set si
 
 " Wrap lines
 set wrap
+
+" Coverts tabs into spaces
+set expandtab
 
 " Always show status line
 set laststatus=2

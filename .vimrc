@@ -50,6 +50,14 @@ set incsearch
 " Show matching brackets when hovering over a bracket
 set showmatch
 
+" Remove vertical split pane highlighting
+highlight VertSplit cterm=NONE
+
+" Set line number to be gray
+highlight LineNr ctermfg=grey
+
+" Set current line number to be 
+
 " Blink every how many tenths of a second
 set mat=2
 
@@ -79,3 +87,9 @@ set shiftwidth=4
 " If filetype is text or markdown, set spellcheck
 autocmd Filetype text setlocal spell
 autocmd Filetype markdown setlocal spell
+
+set cursorline
+set cursorlineopt=number
+
+" Remove tilde characters at the end of the buffer
+set fillchars=eob:\ 

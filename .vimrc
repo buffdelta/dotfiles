@@ -1,5 +1,5 @@
 let g:lightline = {
-        \ 'colorscheme': 'srcery_drk',
+        \ 'colorscheme': 'apprentice',
         \ 'active': {
         \       'left': [ [ 'mode', 'paste' ],
         \                         [ 'readonly', 'filename', 'gitbranch', 'charvalue', 'modified' ] ]
@@ -12,7 +12,13 @@ let g:lightline = {
         \ },
         \ }
 
+colorscheme retrobox
+
+" Map keyboard combo, left-control, w, t to create a new terminal window
 map <C-w>t :tab terminal<CR>
+
+" Terminal accerleration
+set ttyfast
 
 " Since we are using lightline, this will disable prompts of which mode we are in
 set noshowmode
@@ -53,11 +59,6 @@ set showmatch
 " Remove vertical split pane highlighting
 highlight VertSplit cterm=NONE
 
-" Set line number to be gray
-highlight LineNr ctermfg=grey
-
-" Set current line number to be 
-
 " Blink every how many tenths of a second
 set mat=2
 
@@ -65,9 +66,9 @@ set mat=2
 syntax enable
 
 " Auto indent
-set ai
+set autoindent
 " Smart indent
-set si
+set smartindent
 
 " Wrap lines
 set wrap
@@ -84,12 +85,15 @@ set tabstop=4
 " How long is Shift-<, or Shift->
 set shiftwidth=4
 
+" Highlight current line/line-number
+set cursorline
+
 " If filetype is text or markdown, set spellcheck
 autocmd Filetype text setlocal spell
 autocmd Filetype markdown setlocal spell
 
-set cursorline
-set cursorlineopt=number
-
 " Remove tilde characters at the end of the buffer
 set fillchars=eob:\ 
+
+" Explicitly set vertical split character
+set fillchars+=vert:\|

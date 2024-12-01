@@ -1,18 +1,14 @@
-let g:lightline = {
-        \ 'colorscheme': 'apprentice',
-        \ 'active': {
-        \       'left': [ [ 'mode', 'paste' ],
-        \                         [ 'readonly', 'filename', 'gitbranch', 'charvalue', 'modified' ] ]
-        \       },
-        \ 'inactive': {
-        \       'left': [ [ 'filename', 'modified' ] ]
-        \ },
-        \ 'component_function': {
-        \       'gitbranch': 'FugitiveHead'
-        \ },
-        \ }
+"---------------------------------------"
+"    _   _ ________  _________  _____   "
+"   | | | |_   _|  \/  || ___ \/  __ \  "
+"   | | | | | | | .  . || |_/ /| /  \/  "
+"   | | | | | | | |\/| ||    / | |      "
+"   \ \_/ /_| |_| |  | || |\ \ | \__/\  "
+"    \___/ \___/\_|  |_/\_| \_| \____/  "
+"                                       "
+"---------------------------------------"
 
-colorscheme retrobox
+set t_Co=256
 
 " Map keyboard combo, left-control, w, t to create a new terminal window
 map <C-w>t :tab terminal<CR>
@@ -56,9 +52,6 @@ set incsearch
 " Show matching brackets when hovering over a bracket
 set showmatch
 
-" Remove vertical split pane highlighting
-highlight VertSplit cterm=NONE
-
 " Blink every how many tenths of a second
 set mat=2
 
@@ -71,13 +64,10 @@ set autoindent
 set smartindent
 
 " Wrap lines
-set wrap
+set nowrap
 
 " Coverts tabs into spaces
 set expandtab
-
-" Always show status line
-set laststatus=2
 
 " How long is tab
 set tabstop=4
@@ -93,7 +83,14 @@ autocmd Filetype text setlocal spell
 autocmd Filetype markdown setlocal spell
 
 " Remove tilde characters at the end of the buffer
-set fillchars=eob:\ 
+set fillchars=eob:\
 
 " Explicitly set vertical split character
 set fillchars+=vert:\|
+
+colorscheme calm
+
+" Always show status line
+set laststatus=2
+
+let g:airline_theme='airlinecalm'

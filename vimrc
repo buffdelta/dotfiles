@@ -1,12 +1,12 @@
-"---------------------------------------"
-"    _   _ ________  _________  _____   "
-"   | | | |_   _|  \/  || ___ \/  __ \  "
-"   | | | | | | | .  . || |_/ /| /  \/  "
-"   | | | | | | | |\/| ||    / | |      "
-"   \ \_/ /_| |_| |  | || |\ \ | \__/\  "
-"    \___/ \___/\_|  |_/\_| \_| \____/  "
-"                                       "
-"---------------------------------------"
+"--------------------------------------"
+"   _   _ ________  _________  _____   "
+"  | | | |_   _|  \/  || ___ \/  __ \  "
+"  | | | | | | | .  . || |_/ /| /  \/  "
+"  | | | | | | | |\/| ||    / | |      "
+"  \ \_/ /_| |_| |  | || |\ \ | \__/\  "
+"   \___/ \___/\_|  |_/\_| \_| \____/  "
+"                                      "
+"--------------------------------------"
 
 set t_Co=256
 
@@ -78,10 +78,6 @@ set shiftwidth=4
 " Highlight current line/line-number
 set cursorline
 
-" If filetype is text or markdown, set spellcheck
-autocmd Filetype text setlocal spell
-autocmd Filetype markdown setlocal spell
-
 " Remove tilde characters at the end of the buffer
 set fillchars=eob:\
 
@@ -93,4 +89,9 @@ colorscheme calm
 " Always show status line
 set laststatus=2
 
-let g:airline_theme='airlinecalm'
+let g:airline_theme='calmairline'
+
+" If filetype is text or markdown, set spellcheck
+autocmd Filetype text setlocal spell
+autocmd Filetype markdown setlocal spell
+

@@ -1,9 +1,12 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-#
-RED='\033[0;31m'
-GREEN='\033[0;32m'
+#--------------------------------------------"
+#  ______  ___   _____ _   _ ______  _____   "
+#  | ___ \/ _ \ /  ___| | | || ___ \/  __ \  "
+#  | |_/ / /_\ \\ `--.| |_| || |_/ /| /  \/  "
+#  | ___ \  _  | `--. \  _  ||    / | |      "
+#  | |_/ / | | |/\__/ / | | || |\ \ | \__/\  "
+#  \____/\_| |_/\____/\_| |_/\_| \_| \____/  "
+#                                            "
+#--------------------------------------------"
 
 # If not running interactively, don't do anything
 case $- in
@@ -43,29 +46,24 @@ case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+        ;;
+    *)
+        ;;
 esac
 
 # enable color support of ls and also add handy aliases
@@ -93,10 +91,6 @@ alias l='ls -CF'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -115,46 +109,41 @@ fi
 # Turn bell off
 set bell-style none
 
-# Environment variables
-# Java
-export JAVA_HOME=/usr/lib/jvm/jdk-11.0.0.2/
-export PATH=$JAVA_HOME/bin:$PATH
-# 414
-export CS414_USE_DATABASE_TUNNEL=true
-
 echo ""
 if [[ $- == *i* ]]; then
-	neofetch
-
-	COLS=$(tput cols)
-	for ((i = 0; i < COLS; i++)); do
-		echo -n "─";
-	done
-
-	echo ""
+    neofetch
+    COLS=$(tput cols)
+    for ((i = 0; i < COLS; i++)); do
+        echo -n "─";
+    done
+    echo ""
 fi
 
-# Display weather at login
-# ? = begin of request
-# 0 = display current temp
-# u = display temp in Fahrenheit
-curl wttr.in/Fort+Collins?0u
+# Display weather on terminal start up
+# ? = Beginning of request
+# 0 = Display current temperature
+# u = Display temperature in Fahrenheit
+CURL_RETURN_CODE=0
+/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u || CURL_RETURN_CODE=$?
+if [ ${CURL_RETURN_CODE} == 0 ]; then
+    for ((i = 0; i < COLS; i++)); do
+        echo -n "─";
+    done
+fi
 
-# Print horizontal barrier based off the size of the current terminal screen
-for ((i = 0; i < COLS; i++)); do
-	echo -n "─";
-done
+RED='\033[0;31m'
+GREEN='\033[0;32m'
 
 function git_branch() {
     if git rev-parse --is-inside-work-tree &> /dev/null; then
-		color=$RED
-		if git add . && git diff --quiet && git diff --cached --quiet; then 	
-			color=$GREEN 
-		fi
-		branch=$(git branch --show-current)
-		echo -e " $color($branch) "
-	fi
+        color=$RED
+        if git diff --quiet && git diff --cached --quiet; then
+            color=$GREEN
+        fi
+        branch=$(git branch --show-current)
+        echo -e " $color($branch) "
+    fi
 }
 
-# Display git branch
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]`git_branch`\[\033[01;00m\]\$ ' 
+# Command-line + Display Git branch if present
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]`git_branch`\[\033[01;00m\]\$ '

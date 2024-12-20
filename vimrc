@@ -10,13 +10,15 @@
 
 set t_Co=256
 
+set hidden
+
 " Map keyboard combo, left-control, w, t to create a new terminal window
 map <C-w>t :tab terminal<CR>
 
 " Terminal accerleration
 set ttyfast
 
-" Since we are using lightline, this will disable prompts of which mode we are in
+" Since we are using airline, this will disable prompts of which mode we are in
 set noshowmode
 
 " Backspace over everything
@@ -89,9 +91,9 @@ colorscheme calm
 " Always show status line
 set laststatus=2
 
-let g:airline_theme='calmairline'
+let g:airline_theme='calm'
+let g:airline#extensions#tabline#enabled = 1
 
 " If filetype is text or markdown, set spellcheck
 autocmd Filetype text setlocal spell
 autocmd Filetype markdown setlocal spell
-

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+PACKAGE_INSTALL_COMMAND=apt-get install
 BACKUP_DIR_MADE=false
 
 # TODO colors should match throughout terminal, neofetch, vim/colors/calm and vim/vim-airline
@@ -9,12 +10,24 @@ BACKUP_DIR_MADE=false
 
 # TODO As of now, the user will provide their preferred way for downloading apps, by providing the command to install
 
-# TODO file organization
 # TODO termguicolors?
 
 # $1 = File location
 # $2 = Symlink file destination
 function create_symlink() {
+    
+    # If Arg count is not equal two, return early.
+    if [ $# != 2 ]; then
+        echo "ERROR: Too few arguments given, stopping process of creating a symlink."
+        return
+    fi
+
+    # If file/directory does not exist, return early.
+    if [ ! -f ~/$2 ] && [ ! -d ~/$2 ]; then
+        echo "ERROR: ~/$2 does not exist, stopping process of creating a symlink."
+        return
+    fi
+
     while true; do
         read -p "Would you like to link $SCRIPT_DIR/$1 -> ~/$2 [y/n]? " response
         case $response in
@@ -113,17 +126,20 @@ function install_extension() {
 }
 
 # bashrc
-create_symlink bashrc .bashrc
+create_symlink configurations/bashrc .bashrc
 
 # neofetch
 install_extension neofetch
-create_symlink neofetch .config/neofetch
+create_symlink configurations/neofetch .config/neofetch
+
+# curl
+install_extension curl
 
 # vim configurations
 install_extension vim
-create_symlink vimrc .vimrc
-create_symlink calm.vim .vim/colors/calm.vim
+create_symlink configurations/vimrc .vimrc
+create_symlink configurations/calm.vim .vim/colors/calm.vim
 
 # vim-airline
 install_extension https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline
-create_symlink airlinecalm.vim .vim/pack/dist/start/vim-airline/autoload/airline/themes/calm.vim
+create_symlink configurations/airlinecalm.vim .vim/pack/dist/start/vim-airline/autoload/airline/themes/calm.vim

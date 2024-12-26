@@ -1,8 +1,41 @@
-# Vimrc
+# TODO add curl to extension needing installation
 
-This is my template for vim custimizations that I use. I store it in this folder to ensure that if something were to happen to my PC or Laptop, I could keep this.
+<h1 align="center"> dotfiles </h3>
 
-# Bashrc
+<p align="center"> My personal dotfiles with an interactive installer. </p>
 
-Needs dconf, and https://github.com/dracula/gnome-terminal for terminal colors.
-These contain some of my basic custimizations for my bash terminal prompt.
+## Features
+
+This repository contains my custom dotfiles. Only an internet connection and git are required to deploy these configurations.
+
+## Installation
+
+To download this repository run:
+
+```
+cd ~/ && git clone https://github.com/buffdelta/dotfiles
+```
+
+To install this repository run:
+
+```
+~/./dotfiles/install.sh
+```
+
+Then answer the prompts given by the script.
+
+## Features
+
+A custom vim colorscheme, calm.vim. A colorscheme for [vim-airline](https://github.com/vim-airline/vim-airline). A minimally changed [Neofetch](https://github.com/dylanaraps/neofetch) config. Lastly, this repo contains a shell file, *install.sh* which handles installation of these files in a menu-based way.
+
+### bashrc
+
+My bashrc, with configurations that I have found to be the most helpful. Notably, it will run Neofetch at start up, as well as curl wttr.in, if the request does not take longer than a second (We do not want to hang for a long time). It also contains a function, git_branch, which will output the current branch of the github repo if we are inside one, and change colors if any changes have been made to the repo.
+
+### Vim
+
+My vimrc, with configurations that I have found to be the most beneficial during development. This repository also contains a custom color scheme; calm.vim, which will be installed in ~/.vim/colors, as of now it only works on terminals which offer all 256 colors. As well as a color scheme for [vim-airline](https://github.com/vim-airline/vim-airline).
+
+### [Neofetch](https://github.com/dylanaraps/neofetch)
+
+A customized config for [Neofetch](https://github.com/dylanaraps/neofetch), which changes minimal things compared to default config.

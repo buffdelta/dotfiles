@@ -1,7 +1,4 @@
-# TODO add curl to extension needing installation
-
 <h1 align="center"> dotfiles </h3>
-
 <p align="center"> My personal dotfiles with an interactive installer. </p>
 
 ## Features

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-PACKAGE_INSTALL_COMMAND=apt-get install
+PACKAGE_INSTALL_COMMAND="apt-get install"
 BACKUP_DIR_MADE=false
 
 # TODO colors should match throughout terminal, neofetch, vim/colors/calm and vim/vim-airline
@@ -15,7 +15,6 @@ BACKUP_DIR_MADE=false
 # $1 = File location
 # $2 = Symlink file destination
 function create_symlink() {
-    
     # If Arg count is not equal two, return early.
     if [ $# != 2 ]; then
         echo "ERROR: Too few arguments given, stopping process of creating a symlink."
@@ -23,7 +22,7 @@ function create_symlink() {
     fi
 
     # If file/directory does not exist, return early.
-    if [ ! -f ~/$2 ] && [ ! -d ~/$2 ]; then
+    if [ ! -f $SCRIPT_DIR/$1 ] && [ ! -d $SCRIPT_DIR/$1 ]; then
         echo "ERROR: ~/$2 does not exist, stopping process of creating a symlink."
         return
     fi
@@ -124,6 +123,9 @@ function install_extension() {
         done
     fi
 }
+
+# gitconfig
+create_symlink configurations/gitconfig .gitconfig
 
 # bashrc
 create_symlink configurations/bashrc .bashrc

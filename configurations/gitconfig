@@ -1,0 +1,12 @@
+[user]
+  name = Christopher Williams
+  email = chrisw.s2001@gmail.com
+
+[status]
+  branch = true
+
+[color "status"]
+  branch = green
+  added = green
+  changed = yellow
+  untracked = red

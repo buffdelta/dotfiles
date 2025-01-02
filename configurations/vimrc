@@ -8,7 +8,7 @@
 "                                      "
 "--------------------------------------"
 
-set t_Co=256
+" set t_Co=256
 
 set hidden
 
@@ -91,8 +91,9 @@ colorscheme calm
 " Always show status line
 set laststatus=2
 
-let g:airline_theme='calm'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline_theme='calm'
 
 " If filetype is text or markdown, set spellcheck
 autocmd Filetype text setlocal spell

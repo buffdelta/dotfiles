@@ -9,8 +9,12 @@ BACKUP_DIR_MADE=false
 #   /mnt/c/Users/Chris/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe
 
 # TODO As of now, the user will provide their preferred way for downloading apps, by providing the command to install
+# TODO change colors of conidtionals in color scheme?
 
 # TODO termguicolors?
+# TODO highlight shows colors of term for airline 
+
+# TODO Fix inactive terminal color, virtual machine has a working example
 
 # $1 = File location
 # $2 = Symlink file destination

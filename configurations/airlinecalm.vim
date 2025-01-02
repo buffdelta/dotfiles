@@ -2,61 +2,101 @@ scriptencoding utf-8
 
 let g:airline#themes#calm#palette = {}
 
-let s:airline_a_normal = [ '#000000' , '#000000' , 16  , 108 ]
-let s:airline_b_normal = [ '#000000' , '#000000' , 253  , 237 ]
-let s:airline_c_normal = [ '#9cffd3' , '#202020' , 253  , 237 ]
-let g:airline#themes#calm#palette.normal = airline#themes#generate_color_map(s:airline_a_normal, s:airline_b_normal, s:airline_c_normal)
-let g:airline#themes#calm#palette.normal_modified = {
-      \ 'airline_c': [ '#ffffff' , '#5f005f' , 253     , 237      , ''     ] ,
-      \ }
-
-let s:airline_a_insert = [ '#00005f' , '#00dfff' , 16  , 179 ]
-let s:airline_b_insert = [ '#ffffff' , '#005fff' , 253 , 237 ]
-let s:airline_c_insert = [ '#ffffff' , '#000080' , 253 , 237 ]
-let g:airline#themes#calm#palette.insert = airline#themes#generate_color_map(s:airline_a_insert, s:airline_b_insert, s:airline_c_insert)
-let g:airline#themes#calm#palette.insert_modified = {
-      \ 'airline_c': [ '#ffffff' , '#5f005f' , 253     , 237      , ''     ] ,
-      \ }
-
-let g:airline#themes#calm#palette.insert_paste = {
-      \ 'airline_a': [ s:airline_a_insert[0]   , '#d78700' , s:airline_a_insert[2] , 172     , ''     ] ,
-      \ }
-
-let g:airline#themes#calm#palette.replace = copy(g:airline#themes#calm#palette.insert)
-let g:airline#themes#calm#palette.replace.airline_a = [ s:airline_b_insert[0]   , '#af0000' , s:airline_b_insert[2] , 124     , ''     ]
-let g:airline#themes#calm#palette.replace_modified = g:airline#themes#calm#palette.insert_modified
-
-let s:airline_a_visual = [ '#000000' , '#ffaf00' , 16  , 214 ]
-let s:airline_b_visual = [ '#000000' , '#ff5f00' , 253 , 237 ]
-let s:airline_c_visual = [ '#ffffff' , '#5f0000' , 253 , 237 ]
-let g:airline#themes#calm#palette.visual = airline#themes#generate_color_map(s:airline_a_visual, s:airline_b_visual, s:airline_c_visual)
-let g:airline#themes#calm#palette.visual_modified = {
-      \ 'airline_c': [ '#ffffff' , '#5f005f' , 255     , 237      , ''     ] ,
-      \ }
-
-let s:airline_a_inactive = [ '#4e4e4e' , '#1c1c1c' , 239 , 234 , '' ]
-let s:airline_b_inactive = [ '#4e4e4e' , '#262626' , 239 , 235 , '' ]
-let s:airline_c_inactive = [ '#4e4e4e' , '#303030' , 239 , 236 , '' ]
-let g:airline#themes#calm#palette.inactive = airline#themes#generate_color_map(s:airline_a_inactive, s:airline_b_inactive, s:airline_c_inactive)
-let g:airline#themes#calm#palette.inactive_modified = {
-      \ 'airline_c': [ '#875faf' , '' , 97 , '' , '' ] ,
-      \ }
-
-let s:airline_a_commandline = [ '#00005f' , '#00d700' , 16   , 75  ]
-let s:airline_b_commandline = [ '#ffffff' , '#444444' , 253  , 237 ]
-let s:airline_c_commandline = [ '#9cffd3' , '#202020' , 253  , 237 ]
-let g:airline#themes#calm#palette.commandline = airline#themes#generate_color_map(s:airline_a_commandline, s:airline_b_commandline, s:airline_c_commandline)
-
 let g:airline#themes#calm#palette.accents = {
       \ 'red': [ '#ff0000' , '' , 160 , ''  ]
       \ }
 
-" Terminal status bar
-let s:airline_a_terminal = [ '#00000f' , '#000000' , 16 , 219  ]
-let s:airline_b_terminal = [ '#00000f' , '#000000' , 253 , 16  ]
-let s:airline_c_terminal = [ '#00000f' , '#000000' , 253 , 237 ]
+let s:airline_b = [ '#000000' , '#000000' , g:pallete.calm_white , g:pallete.calm_dark_black ]
+let s:airline_c = [ '#000000' , '#000000' , g:pallete.calm_white , g:pallete.calm_black ]
+let s:airline_warning = [ '#000000' , '#000000' , g:pallete.calm_white , g:pallete.calm_red ]
 
-let g:airline#themes#calm#palette.terminal = airline#themes#generate_color_map(s:airline_a_terminal, s:airline_b_terminal, s:airline_c_terminal)
-let g:airline#themes#calm#palette.normal_modified.airline_term = s:airline_c_terminal
-let g:airline#themes#calm#palette.terminal.airline_term = s:airline_c_terminal
-let g:airline#themes#calm#palette.visual_modified.airline_term = s:airline_c_terminal
+
+" Normal Mode
+let s:airline_a_normal = [ '#000000' , '#000000' , g:pallete.calm_black , g:pallete.calm_blue ]
+
+let g:airline#themes#calm#palette.normal = airline#themes#generate_color_map(s:airline_a_normal, s:airline_b, s:airline_c)
+let g:airline#themes#calm#palette.normal.airline_error = [ '#000000' , '#000000' , 0 , 0 ]
+let g:airline#themes#calm#palette.normal.airline_warning = s:airline_warning
+let g:airline#themes#calm#palette.normal.airline_error_inactive = [ '#000000' , '#000000' , 0 , 0 ]
+let g:airline#themes#calm#palette.normal.airline_error_red = [ '#000000' , '#000000' , 0 , 0 ]
+let g:airline#themes#calm#palette.normal.airline_warning_red = [ '#000000' , '#000000' , 0 , 0 ]
+let g:airline#themes#calm#palette.normal.airline_term = s:airline_c 
+let g:airline#themes#calm#palette.normal_modified = deepcopy(g:airline#themes#calm#palette.normal)
+
+
+" Insert Mode
+let s:airline_a_insert = [ '#00005f' , '#00dfff' , g:pallete.calm_black , g:pallete.calm_yellow ]
+
+let g:airline#themes#calm#palette.insert = airline#themes#generate_color_map(s:airline_a_insert, s:airline_b, s:airline_c)
+let g:airline#themes#calm#palette.insert.airline_error = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.insert.airline_warning = s:airline_warning
+let g:airline#themes#calm#palette.insert.airline_error_inactive = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.insert.airline_error_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.insert.airline_warning_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.insert.airline_term = s:airline_c
+let g:airline#themes#calm#palette.insert_modified = deepcopy(g:airline#themes#calm#palette.insert)
+
+
+" Replace Mode
+let s:airline_a_replace = [ '#000000' , '#000000' , g:pallete.calm_black , 160 ]
+
+let g:airline#themes#calm#palette.replace = airline#themes#generate_color_map(s:airline_a_replace, s:airline_b, s:airline_c)
+let g:airline#themes#calm#palette.replace.airline_error = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.replace.airline_warning = s:airline_warning
+let g:airline#themes#calm#palette.replace.airline_error_inactive = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.replace.airline_error_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.replace.airline_warning_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.replace.airline_term = s:airline_c
+let g:airline#themes#calm#palette.replace_modified = deepcopy(g:airline#themes#calm#palette.replace)
+
+
+" Visual Mode
+let s:airline_a_visual = [ '#000000' , '#ffaf00' , g:pallete.calm_black  , 214 ]
+
+let g:airline#themes#calm#palette.visual = airline#themes#generate_color_map(s:airline_a_visual, s:airline_b, s:airline_c)
+let g:airline#themes#calm#palette.visual.airline_error = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.visual.airline_warning = s:airline_warning
+let g:airline#themes#calm#palette.visual.airline_error_inactive = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.visual.airline_error_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.visual.airline_warning_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.visual.airline_term = s:airline_c
+let g:airline#themes#calm#palette.visual_modified = deepcopy(g:airline#themes#calm#palette.visual)
+
+
+" Command Mode
+let s:airline_a_commandline = [ '#00005f' , '#00d700' , g:pallete.calm_black , 75  ]
+
+let g:airline#themes#calm#palette.commandline = airline#themes#generate_color_map(s:airline_a_commandline, s:airline_b, s:airline_c)
+let g:airline#themes#calm#palette.commandline.airline_error = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.commandline.airline_warning = s:airline_warning
+let g:airline#themes#calm#palette.commandline.airline_error_inactive = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.commandline.airline_error_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.commandline.airline_warning_red = [ '#000000' , '#000000', 0, 0 ]
+let g:airline#themes#calm#palette.commandline.airline_term = s:airline_c
+let g:airline#themes#calm#palette.commandline_modified = deepcopy(g:airline#themes#calm#palette.commandline)
+
+
+" Inactive
+let s:airline_a_inactive = [ '#4e4e4e' , '#1c1c1c' , g:pallete.calm_gray , 233 , '' ]
+let s:airline_b_inactive = [ '#4e4e4e' , '#262626' , g:pallete.calm_gray , g:pallete.calm_dark_black , '' ]
+let s:airline_c_inactive = [ '#4e4e4e' , '#303030' , g:pallete.calm_gray , g:pallete.calm_black , '' ]
+
+let g:airline#themes#calm#palette.inactive = airline#themes#generate_color_map(s:airline_a_inactive, s:airline_b_inactive, s:airline_c_inactive)
+let g:airline#themes#calm#palette.inactive.airline_term = s:airline_c
+let g:airline#themes#calm#palette.inactive_modified = deepcopy(g:airline#themes#calm#palette.inactive)
+
+
+" Tabline
+let g:airline#themes#calm#palette.tabline = {}
+let g:airline#themes#calm#palette.tabline.airline_tab = [ '#4e4e4e' , '#303030' , g:pallete.calm_black , g:pallete.calm_gray , 'bold' ]
+let g:airline#themes#calm#palette.tabline.airline_tab_right = [ '#4e4e4e' , '#303030' , g:pallete.calm_black , g:pallete.calm_black , 'bold' ]
+let g:airline#themes#calm#palette.tabline.airline_tabsel = [ '#4e4e4e' , '#303030' , g:pallete.calm_black , 108 , 'bold' ]
+let g:airline#themes#calm#palette.tabline.airline_tabsel_right = [ '#4e4e4e' , '#303030' , g:pallete.calm_gray , g:pallete.calm_black , 'bold' ]
+let g:airline#themes#calm#palette.tabline.airline_tabfill = [ '#4e4e4e' , '#303030' , g:pallete.calm_yellow , g:pallete.calm_black ]
+let g:airline#themes#calm#palette.tabline.airline_tabmod = [ '#4e4e4e' , '#303030' , g:pallete.calm_black , 220 ]
+let g:airline#themes#calm#palette.tabline.airline_tabmod_right = [ '#4e4e4e' , '#303030' , g:pallete.calm_yellow , g:pallete.calm_black ]
+let g:airline#themes#calm#palette.tabline.airline_tabmod_unsel = [ '#4e4e4e' , '#303030' , g:pallete.calm_black , 220 , 'bold' ]
+let g:airline#themes#calm#palette.tabline.airline_tabtype = s:airline_a_commandline
+let g:airline#themes#calm#palette.tabline.airline_tablabel = [ '#000000' , '#000000' , g:pallete.calm_gray , g:pallete.calm_dark_black ]
+let g:airline#themes#calm#palette.tabline.airline_tablabel_right = [ '#000000' , '#000000' , g:pallete.calm_gray , g:pallete.calm_black , 'bold' ]
+let g:airline#themes#calm#palette.tabline.airline_tabhid = [ '#000000' , '#000000' , g:pallete.calm_black , g:pallete.calm_gray , 'bold' ]

@@ -1,26 +1,37 @@
-"   _____       _           
-"  /  __ \     | |          
-"  | /  \/ __ _| |_ __ ___  
-"  | |    / _` | | '_ ` _ \ 
+"   _____       _
+"  /  __ \     | |
+"  | /  \/ __ _| |_ __ ___
+"  | |    / _` | | '_ ` _ \
 "  | \__/\ (_| | | | | | | |
 "   \____/\__,_|_|_| |_| |_|
-"                         
+"
 
 set background=dark
 hi clear
+
+let g:pallete = {
+    \ 'calm_yellow'     : 220,
+    \ 'calm_blue'       : 108,
+    \ 'calm_red'        :  88,
+    \ 'calm_white'      : 253,
+    \ 'calm_gray'       : 240,
+    \ 'calm_black'      : 235,
+    \ 'calm_dark_black' : 234
+    \ }
 
 let g:colors_name = 'calm'
 
 hi ColorColumn ctermfg=NONE ctermbg=90 cterm=NONE
 hi Comment ctermfg=180 ctermbg=NONE cterm=NONE
 hi Conceal ctermfg=NONE ctermbg=NONE cterm=NONE
+hi Conditional ctermfg=214 ctermbg=NONE cterm=NONE
 hi Constant ctermfg=202 ctermbg=NONE cterm=NONE
 hi Cursor ctermfg=NONE ctermbg=NONE cterm=NONE
 hi CursorColumn ctermfg=NONE ctermbg=25 cterm=NONE
 hi CursorIM ctermfg=16 ctermbg=220 cterm=NONE
 hi CursorLine ctermfg=NONE ctermbg=238 cterm=NONE
-hi CursorLineNr ctermfg=253 ctermbg=NONE cterm=NONE
-hi Directory ctermfg=87 ctermbg=NONE cterm=NONE
+execute 'highlight CursorLineNr ctermfg=' . g:pallete.calm_white . 'ctermbg=90 cterm=NONE'
+hi Directory ctermfg=219 ctermbg=NONE cterm=NONE
 hi EndOfBuffer ctermfg=220 ctermbg=NONE cterm=NONE
 hi Error ctermfg=209 ctermbg=18 cterm=reverse
 hi ErrorMsg ctermfg=231 ctermbg=160 cterm=NONE
@@ -34,9 +45,10 @@ hi LineNr ctermfg=243 ctermbg=NONE cterm=NONE
 hi MatchParen ctermfg=NONE ctermbg=NONE cterm=reverse
 hi ModeMsg ctermfg=18 ctermbg=46 cterm=NONE
 hi MoreMsg ctermfg=87 ctermbg=NONE cterm=NONE
+
 hi NonText ctermfg=176 ctermbg=NONE cterm=NONE
 hi Normal ctermfg=253 ctermbg=0 cterm=NONE
-hi Pmenu ctermfg=231 ctermbg=30 cterm=NONE
+hi Pmenu ctermfg=0 ctermbg=30 cterm=NONE
 hi PmenuSbar ctermfg=NONE ctermbg=NONE cterm=NONE
 hi PmenuSel ctermfg=30 ctermbg=231 cterm=NONE
 hi PmenuThumb ctermfg=NONE ctermbg=231 cterm=NONE
@@ -52,7 +64,7 @@ hi SpellCap ctermfg=46 ctermbg=NONE cterm=underline
 hi SpellLocal ctermfg=231 ctermbg=NONE cterm=underline
 hi SpellRare ctermfg=176 ctermbg=NONE cterm=underline
 hi Statement ctermfg=214 ctermbg=NONE cterm=NONE
-hi StatusLine ctermfg=253 ctermbg=244 cterm=NONE
+hi StatusLine ctermfg=253 ctermbg=235 cterm=NONE
 hi StatusLineNC ctermfg=18 ctermbg=NONE cterm=NONE
 hi Title ctermfg=176 ctermbg=NONE cterm=NONE
 hi Todo ctermfg=NONE ctermbg=NONE cterm=reverse
@@ -67,6 +79,28 @@ hi WarningMsg ctermfg=176 ctermbg=NONE cterm=NONE
 hi WildMenu ctermfg=18 ctermbg=220 cterm=NONE
 hi debugBreakpoint ctermfg=46 ctermbg=18 cterm=reverse
 hi debugPC ctermfg=87 ctermbg=18 cterm=reverse
+
+" Netrw
+hi netrwSymLink ctermfg=30 ctermbg=NONE cterm=NONE
+hi netrwExe ctermfg=108 ctermbg=NONE cterm=NONE
+hi netrwClassify ctermfg=15 ctermbg=NONE cterm=NONE
+hi netrwList ctermfg=212 ctermbg=NONE cterm=NONE
+hi netrwHelpCmd ctermfg=108 ctermbg=NONE cterm=NONE
+hi netrwVersion ctermfg=200 ctermbg=NONE cterm=NONE
+hi! link netrwComment Comment
+
+" Vim Documentation
+hi helpCommand ctermfg=16 ctermbg=NONE cterm=NONE
+hi helpExample ctermfg=246 ctermbg=NONE cterm=ITALIC
+hi helpHeadline ctermfg=253 ctermbg=NONE cterm=NONE
+hi helpHyperTextEntry ctermfg=214 ctermbg=NONE cterm=NONE
+hi helpHyperTextJump ctermfg=106 ctermbg=NONE cterm=UNDERLINE
+hi helpStar ctermfg=244 ctermbg=NONE cterm=ITALIC
+hi helpSectionDelim ctermfg=244 ctermbg=NONE cterm=NONE
+hi helpSpecial ctermfg=220 ctermbg=NONE cterm=ITALIC
+hi helpURL ctermfg=75 ctermbg=NONE cterm=UNDERLINE
+hi helpOption ctermfg=75 ctermbg=NONE cterm=NONE
+
 hi! link Terminal Normal
 hi! link Debug Special
 hi! link diffAdded String
@@ -92,7 +126,6 @@ hi! link TabLineFill StatusLineNC
 hi! link TabLineSel StatusLine
 hi! link Boolean Constant
 hi! link Character Constant
-hi! link Conditional Statement
 hi! link Define PreProc
 hi! link Delimiter Special
 hi! link Exception Statement
@@ -112,7 +145,6 @@ hi! link String Constant
 hi! link Structure Type
 hi! link Tag Special
 hi! link Typedef Type
-hi! link Terminal Normal
 hi! link MessageWindow Pmenu
 hi! link PopupNotification Todo
 hi DiffAdd ctermfg=231 ctermbg=65 cterm=NONE

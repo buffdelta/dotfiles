@@ -4,18 +4,6 @@ readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null 
 PACKAGE_INSTALL_COMMAND="apt-get install"
 BACKUP_DIR_MADE=false
 
-# TODO colors should match throughout terminal, neofetch, vim/colors/calm and vim/vim-airline
-# TODO If on windows terminal, we should go to settings.json in AppData/Local/packages/ and add our custom scheme
-#   /mnt/c/Users/Chris/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe
-
-# TODO As of now, the user will provide their preferred way for downloading apps, by providing the command to install
-# TODO change colors of conidtionals in color scheme?
-
-# TODO termguicolors?
-# TODO highlight shows colors of term for airline 
-
-# TODO Fix inactive terminal color, virtual machine has a working example
-
 # $1 = File location
 # $2 = Symlink file destination
 function create_symlink() {

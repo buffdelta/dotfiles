@@ -21,6 +21,28 @@ let g:pallete = {
 
 let g:colors_name = 'calm'
 
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+" Line Number Column
+hi LineNr ctermfg=253 ctermbg=NONE cterm=NONE
+hi LineNrAbove ctermfg=240 ctermbg=235 cterm=NONE
+hi LineNrBelow ctermfg=240 ctermbg=235 cterm=NONE
+
+" Netrw
+hi netrwClassify ctermfg=253 ctermbg=NONE cterm=NONE
+hi netrwComma ctermfg=253 ctermbg=NONE cterm=NONE
+hi netrwExe ctermfg=108 ctermbg=NONE cterm=NONE
+hi netrwHelpCmd ctermfg=108 ctermbg=NONE cterm=NONE
+hi netrwList ctermfg=212 ctermbg=NONE cterm=NONE
+hi netrwSymLink ctermfg=30 ctermbg=NONE cterm=NONE
+hi netrwVersion ctermfg=200 ctermbg=NONE cterm=NONE
+hi! link netrwComment Comment
+
 hi ColorColumn ctermfg=NONE ctermbg=90 cterm=NONE
 hi Comment ctermfg=180 ctermbg=NONE cterm=NONE
 hi Conceal ctermfg=NONE ctermbg=NONE cterm=NONE
@@ -41,10 +63,10 @@ hi Identifier ctermfg=108 ctermbg=NONE cterm=NONE
 hi Ignore ctermfg=102 ctermbg=NONE cterm=NONE
 hi IncSearch ctermfg=176 ctermbg=16 cterm=reverse
 hi Label ctermfg=220 ctermbg=NONE cterm=NONE
-hi LineNr ctermfg=243 ctermbg=NONE cterm=NONE
 hi MatchParen ctermfg=NONE ctermbg=NONE cterm=reverse
-hi ModeMsg ctermfg=18 ctermbg=46 cterm=NONE
-hi MoreMsg ctermfg=87 ctermbg=NONE cterm=NONE
+
+hi ModeMsg ctermfg=253 ctermbg=NONE cterm=NONE
+hi MoreMsg ctermfg=108 ctermbg=NONE cterm=UNDERLINE
 
 hi NonText ctermfg=176 ctermbg=NONE cterm=NONE
 hi Normal ctermfg=253 ctermbg=0 cterm=NONE
@@ -65,29 +87,20 @@ hi SpellLocal ctermfg=231 ctermbg=NONE cterm=underline
 hi SpellRare ctermfg=176 ctermbg=NONE cterm=underline
 hi Statement ctermfg=214 ctermbg=NONE cterm=NONE
 hi StatusLine ctermfg=253 ctermbg=235 cterm=NONE
-hi StatusLineNC ctermfg=18 ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermfg=18 ctermbg=235 cterm=NONE
 hi Title ctermfg=176 ctermbg=NONE cterm=NONE
 hi Todo ctermfg=NONE ctermbg=NONE cterm=reverse
 hi ToolbarButton ctermfg=231 ctermbg=25 cterm=NONE
 hi ToolbarLine ctermfg=NONE ctermbg=NONE cterm=NONE
 hi Type ctermfg=74 ctermbg=NONE cterm=NONE
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline
-hi VertSplit ctermfg=231 ctermbg=NONE cterm=NONE
+hi VertSplit ctermfg=253 ctermbg=235 cterm=NONE
 hi Visual ctermfg=NONE ctermbg=244 cterm=NONE
 hi VisualNOS ctermfg=30 ctermbg=231 cterm=NONE
 hi WarningMsg ctermfg=176 ctermbg=NONE cterm=NONE
 hi WildMenu ctermfg=18 ctermbg=220 cterm=NONE
 hi debugBreakpoint ctermfg=46 ctermbg=18 cterm=reverse
 hi debugPC ctermfg=87 ctermbg=18 cterm=reverse
-
-" Netrw
-hi netrwSymLink ctermfg=30 ctermbg=NONE cterm=NONE
-hi netrwExe ctermfg=108 ctermbg=NONE cterm=NONE
-hi netrwClassify ctermfg=15 ctermbg=NONE cterm=NONE
-hi netrwList ctermfg=212 ctermbg=NONE cterm=NONE
-hi netrwHelpCmd ctermfg=108 ctermbg=NONE cterm=NONE
-hi netrwVersion ctermfg=200 ctermbg=NONE cterm=NONE
-hi! link netrwComment Comment
 
 " Vim Documentation
 hi helpCommand ctermfg=16 ctermbg=NONE cterm=NONE
@@ -101,6 +114,7 @@ hi helpSpecial ctermfg=220 ctermbg=NONE cterm=ITALIC
 hi helpURL ctermfg=75 ctermbg=NONE cterm=UNDERLINE
 hi helpOption ctermfg=75 ctermbg=NONE cterm=NONE
 
+
 hi! link Terminal Normal
 hi! link Debug Special
 hi! link diffAdded String
@@ -113,8 +127,6 @@ hi! link diffDiffer WarningMsg
 hi! link diffCommon WarningMsg
 hi! link diffBDiffer WarningMsg
 hi! link lCursor Cursor
-hi! link LineNrAbove LineNr
-hi! link LineNrBelow LineNr
 hi! link CurSearch Search
 hi! link CursorLineNr CursorLine
 hi! link CursorLineFold CursorLine

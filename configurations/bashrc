@@ -138,7 +138,6 @@ if [ ${CURL_RETURN_CODE} == 0 ]; then
     done
 fi
 
-# TODO fix git branch to work correctly
 function git_branch() {
     BRANCH_COLOR=''
     BRANCH=''
@@ -148,7 +147,6 @@ function git_branch() {
         if git diff --quiet && git diff --cached --quiet; then
             BRANCH_COLOR='\[\033[0;32m\]'
         fi
-#        unpushed=$(git log origin/$(git branch --show-current)..HEAD --oneline)
         if [[ -n $(git log origin/$(git branch --show-current)..HEAD --oneline) ]]; then
             BRANCH_COLOR='\[\033[0;33m\]'
         fi

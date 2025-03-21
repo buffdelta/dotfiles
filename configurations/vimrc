@@ -8,12 +8,31 @@
 "                                      "
 "--------------------------------------"
 
-" set t_Co=256
-
 set hidden
 
 " Map keyboard combo, left-control, w, t to create a new terminal window
 map <C-w>t :tab terminal<CR>
+
+nnoremap <M-Left> <C-O>
+nnoremap <M-Right> <C-I>
+
+" Copy to clipboard
+vnoremap <C-y> :call Get_Visual_Selection()<CR>
+
+" https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
+function! Get_Visual_Selection()
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    echo strings 
+    " execute "! echo -e ".strings." | clip.exe"
+endfunction
 
 " Terminal accerleration
 set ttyfast
@@ -55,7 +74,6 @@ set incsearch
 set showmatch
 
 " Blink every how many tenths of a second
-set mat=2
 
 " Syntax highlighting
 syntax enable
@@ -88,9 +106,15 @@ set fillchars+=vert:\|
 
 colorscheme calm
 
+" Hide *.swp files in Netrw
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
+
 " Always show status line
 set laststatus=2
 
+set virtualedit=onemore
+
+let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline_theme='calm'
@@ -98,3 +122,14 @@ let g:airline_theme='calm'
 " If filetype is text or markdown, set spellcheck
 autocmd Filetype text setlocal spell
 autocmd Filetype markdown setlocal spell
+
+" If filetype is html, highlight TODO, FIXME, and XXX if it is in a comment
+autocmd Filetype html syn keyword htmlCommentTodo TODO FIXME XXX containedin=htmlComment contained
+autocmd Filetype html hi def link htmlCommentTodo Todo
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc

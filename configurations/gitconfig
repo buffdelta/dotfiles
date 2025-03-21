@@ -12,3 +12,7 @@
     added = green bold
     changed = yellow bold
     untracked = red bold
+
+[core]
+    excludesFile = /home/chris/.gitignore
+    editor = vim

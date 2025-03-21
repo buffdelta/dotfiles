@@ -10,110 +10,117 @@ set background=dark
 hi clear
 
 let g:pallete = {
-    \ 'calm_yellow'     : 220,
-    \ 'calm_blue'       : 108,
-    \ 'calm_red'        :  88,
-    \ 'calm_white'      : 253,
-    \ 'calm_gray'       : 240,
-    \ 'calm_black'      : 235,
-    \ 'calm_dark_black' : 234
+    \ 'yellow'     : 220,
+    \ 'green'      : 108,
+    \ 'red'        :  88,
+    \ 'white'      : 253,
+    \ 'gray'       : 240,
+    \ 'black'      : 235,
+    \ 'dark_black' : 234,
     \ }
 
 let g:colors_name = 'calm'
 
-function! SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+function! s:Highlight(syn, fg, bg = "NONE", term = "NONE")
+    execute 'highlight ' . a:syn . ' ctermfg=' . a:fg . ' ctermbg=' . a:bg . ' cterm=' . a:term
 endfunc
 
 " Line Number Column
-hi LineNr ctermfg=253 ctermbg=NONE cterm=NONE
-hi LineNrAbove ctermfg=240 ctermbg=235 cterm=NONE
-hi LineNrBelow ctermfg=240 ctermbg=235 cterm=NONE
+call s:Highlight("LineNr", g:pallete.white)
+call s:Highlight("LineNrAbove", g:pallete.gray, g:pallete.black)
+call s:Highlight("LineNrBelow", g:pallete.gray, g:pallete.black)
 
 " Netrw
-hi netrwClassify ctermfg=253 ctermbg=NONE cterm=NONE
-hi netrwComma ctermfg=253 ctermbg=NONE cterm=NONE
-hi netrwExe ctermfg=108 ctermbg=NONE cterm=NONE
-hi netrwHelpCmd ctermfg=108 ctermbg=NONE cterm=NONE
-hi netrwList ctermfg=212 ctermbg=NONE cterm=NONE
-hi netrwSymLink ctermfg=30 ctermbg=NONE cterm=NONE
-hi netrwVersion ctermfg=200 ctermbg=NONE cterm=NONE
+call s:Highlight("netrwClassify", g:pallete.white)
+call s:Highlight("netrwComma", g:pallete.white)
+call s:Highlight("netrwExe", g:pallete.green)
+call s:Highlight("netrwHelpCmd", g:pallete.green)
+call s:Highlight("netrwList", g:pallete.green)
+call s:Highlight("netrwSymLink", "30")
+call s:Highlight("netrwVersion", g:pallete.green)
+call s:Highlight("Directory", "219")
 hi! link netrwComment Comment
 
-hi ColorColumn ctermfg=NONE ctermbg=90 cterm=NONE
-hi Comment ctermfg=180 ctermbg=NONE cterm=NONE
-hi Conceal ctermfg=NONE ctermbg=NONE cterm=NONE
-hi Conditional ctermfg=214 ctermbg=NONE cterm=NONE
-hi Constant ctermfg=202 ctermbg=NONE cterm=NONE
-hi Cursor ctermfg=NONE ctermbg=NONE cterm=NONE
-hi CursorColumn ctermfg=NONE ctermbg=25 cterm=NONE
-hi CursorIM ctermfg=16 ctermbg=220 cterm=NONE
-hi CursorLine ctermfg=NONE ctermbg=238 cterm=NONE
-execute 'highlight CursorLineNr ctermfg=' . g:pallete.calm_white . 'ctermbg=90 cterm=NONE'
-hi Directory ctermfg=219 ctermbg=NONE cterm=NONE
-hi EndOfBuffer ctermfg=220 ctermbg=NONE cterm=NONE
-hi Error ctermfg=209 ctermbg=18 cterm=reverse
-hi ErrorMsg ctermfg=231 ctermbg=160 cterm=NONE
-hi FoldColumn ctermfg=30 ctermbg=NONE cterm=NONE
-hi Folded ctermfg=18 ctermbg=100 cterm=NONE
-hi Identifier ctermfg=108 ctermbg=NONE cterm=NONE
-hi Ignore ctermfg=102 ctermbg=NONE cterm=NONE
-hi IncSearch ctermfg=176 ctermbg=16 cterm=reverse
-hi Label ctermfg=220 ctermbg=NONE cterm=NONE
-hi MatchParen ctermfg=NONE ctermbg=NONE cterm=reverse
+" Cursor
+call s:Highlight("Cursor", "NONE")
+call s:Highlight("CursorColumn", "NONE", "25")
+call s:Highlight("CursorIM", "16", "220")
+call s:Highlight("CursorLine", "NONE", "238")
+call s:Highlight("CursorLineNr", g:pallete.white, "90")
 
-hi ModeMsg ctermfg=253 ctermbg=NONE cterm=NONE
-hi MoreMsg ctermfg=108 ctermbg=NONE cterm=UNDERLINE
+call s:Highlight("ColorColumn", "NONE", "90")
+call s:Highlight("Comment", "180")
+call s:Highlight("Conceal", "NONE")
+call s:Highlight("Conditional", "214")
+call s:Highlight("Constant", "202")
+call s:Highlight("EndOfBuffer", g:pallete.yellow)
+call s:Highlight("Error", "209", "18", "reverse")
+call s:Highlight("ErrorMsg", g:pallete.white, g:pallete.red)
+call s:Highlight("FoldColumn", "30")
+call s:Highlight("Folded", "18", "100")
+call s:Highlight("Identifier", g:pallete.green)
+call s:Highlight("Ignore", "102")
+call s:Highlight("Label", g:pallete.yellow)
+call s:Highlight("MatchParen", "NONE", g:pallete.white, "NONE")
 
-hi NonText ctermfg=176 ctermbg=NONE cterm=NONE
-hi Normal ctermfg=253 ctermbg=0 cterm=NONE
-hi Pmenu ctermfg=0 ctermbg=30 cterm=NONE
-hi PmenuSbar ctermfg=NONE ctermbg=NONE cterm=NONE
-hi PmenuSel ctermfg=30 ctermbg=231 cterm=NONE
-hi PmenuThumb ctermfg=NONE ctermbg=231 cterm=NONE
-hi PreProc ctermfg=133 ctermbg=NONE cterm=NONE
-hi Question ctermfg=46 ctermbg=NONE cterm=NONE
-hi QuickFixLine ctermfg=16 ctermbg=176 cterm=NONE
-hi Search ctermfg=232 ctermbg=178 cterm=NONE
-hi SignColumn ctermfg=30 ctermbg=NONE cterm=NONE
-hi Special ctermfg=176 ctermbg=NONE cterm=NONE
-hi SpecialKey ctermfg=87 ctermbg=NONE cterm=NONE
-hi SpellBad ctermfg=160 ctermbg=NONE cterm=underline
-hi SpellCap ctermfg=46 ctermbg=NONE cterm=underline
-hi SpellLocal ctermfg=231 ctermbg=NONE cterm=underline
-hi SpellRare ctermfg=176 ctermbg=NONE cterm=underline
-hi Statement ctermfg=214 ctermbg=NONE cterm=NONE
-hi StatusLine ctermfg=253 ctermbg=235 cterm=NONE
-hi StatusLineNC ctermfg=18 ctermbg=235 cterm=NONE
-hi Title ctermfg=176 ctermbg=NONE cterm=NONE
-hi Todo ctermfg=NONE ctermbg=NONE cterm=reverse
-hi ToolbarButton ctermfg=231 ctermbg=25 cterm=NONE
-hi ToolbarLine ctermfg=NONE ctermbg=NONE cterm=NONE
-hi Type ctermfg=74 ctermbg=NONE cterm=NONE
-hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline
-hi VertSplit ctermfg=253 ctermbg=235 cterm=NONE
-hi Visual ctermfg=NONE ctermbg=244 cterm=NONE
-hi VisualNOS ctermfg=30 ctermbg=231 cterm=NONE
-hi WarningMsg ctermfg=176 ctermbg=NONE cterm=NONE
-hi WildMenu ctermfg=18 ctermbg=220 cterm=NONE
-hi debugBreakpoint ctermfg=46 ctermbg=18 cterm=reverse
-hi debugPC ctermfg=87 ctermbg=18 cterm=reverse
+call s:Highlight("ModeMsg", g:pallete.white)
+call s:Highlight("MoreMsg", g:pallete.green, "NONE", "UNDERLINE")
+
+" Search
+call s:Highlight("IncSearch", g:pallete.dark_black, g:pallete.yellow)
+hi! link Search IncSearch
+call s:Highlight("CurSearch", g:pallete.dark_black, g:pallete.white)
+
+call s:Highlight("NonText", "176")
+call s:Highlight("Normal", g:pallete.white, "0")
+call s:Highlight("Pmenu", "0", "30")
+call s:Highlight("PmenuSbar", "NONE")
+call s:Highlight("PmenuSel", "30", "231")
+call s:Highlight("PmenuThumb", "NONE", "231")
+call s:Highlight("PreProc", "133")
+call s:Highlight("Question", "46")
+call s:Highlight("QuickFixLine", "16", "176")
+call s:Highlight("SignColumn", "30")
+call s:Highlight("Special", "176")
+call s:Highlight("SpecialKey", "87")
+call s:Highlight("SpellBad", "160", "NONE", "UNDERLINE")
+call s:Highlight("SpellCap", "46", "NONE", "UNDERLINE")
+call s:Highlight("SpellLocal", "231", "NONE", "UNDERLINE")
+call s:Highlight("SpellRare", "176", "NONE", "UNDERLINE")
+call s:Highlight("Statement", "214")
+call s:Highlight("StatusLine", g:pallete.white, g:pallete.black)
+call s:Highlight("StatusLineNC", "18", g:pallete.black)
+call s:Highlight("Title", "176")
+call s:Highlight("Todo", "NONE", "NONE", "REVERSE")
+call s:Highlight("ToolbarButton", "231", "25")
+call s:Highlight("ToolbarLine", "NONE")
+call s:Highlight("Type", "74")
+call s:Highlight("Underlined", "NONE", "NONE", "UNDERLINE")
+call s:Highlight("VertSplit", g:pallete.white, g:pallete.black)
+call s:Highlight("Visual", "NONE", "244")
+call s:Highlight("VisualNOS", "30", "231")
+call s:Highlight("WarningMsg", "176")
+call s:Highlight("WildMenu", "18", g:pallete.yellow)
+call s:Highlight("debugBreakpoint", "46", "18", "REVERSE")
+call s:Highlight("debugPC", "87", "18", "REVERSE")
 
 " Vim Documentation
-hi helpCommand ctermfg=16 ctermbg=NONE cterm=NONE
-hi helpExample ctermfg=246 ctermbg=NONE cterm=ITALIC
-hi helpHeadline ctermfg=253 ctermbg=NONE cterm=NONE
-hi helpHyperTextEntry ctermfg=214 ctermbg=NONE cterm=NONE
-hi helpHyperTextJump ctermfg=106 ctermbg=NONE cterm=UNDERLINE
-hi helpStar ctermfg=244 ctermbg=NONE cterm=ITALIC
-hi helpSectionDelim ctermfg=244 ctermbg=NONE cterm=NONE
-hi helpSpecial ctermfg=220 ctermbg=NONE cterm=ITALIC
-hi helpURL ctermfg=75 ctermbg=NONE cterm=UNDERLINE
-hi helpOption ctermfg=75 ctermbg=NONE cterm=NONE
+call s:Highlight("helpCommand", "75", "NONE", "ITALIC")
+call s:Highlight("helpExample", "246", "NONE", "ITALIC")
+call s:Highlight("helpHeadline", g:pallete.white)
+call s:Highlight("helpHyperTextEntry", "214")
+call s:Highlight("helpHyperTextJump", "106", "NONE", "UNDERLINE")
+call s:Highlight("helpStar", "244", "NONE", "ITALIC")
+call s:Highlight("helpSectionDelim", "244")
+call s:Highlight("helpSpecial", g:pallete.yellow, "NONE", "ITALIC")
+call s:Highlight("helpURL", "75", "NONE", "UNDERLINE")
+call s:Highlight("helpOption", "75")
 
+" Vim Diff
+call s:Highlight("DiffAdd", "231", "65")
+call s:Highlight("DiffChange", "23","67")
+call s:Highlight("DiffText", "16", "251")
+call s:Highlight("DiffDelete", "231", "133")
 
 hi! link Terminal Normal
 hi! link Debug Special
@@ -127,7 +134,6 @@ hi! link diffDiffer WarningMsg
 hi! link diffCommon WarningMsg
 hi! link diffBDiffer WarningMsg
 hi! link lCursor Cursor
-hi! link CurSearch Search
 hi! link CursorLineNr CursorLine
 hi! link CursorLineFold CursorLine
 hi! link CursorLineSign CursorLine
@@ -159,7 +165,3 @@ hi! link Tag Special
 hi! link Typedef Type
 hi! link MessageWindow Pmenu
 hi! link PopupNotification Todo
-hi DiffAdd ctermfg=231 ctermbg=65 cterm=NONE
-hi DiffChange ctermfg=231 ctermbg=67 cterm=NONE
-hi DiffText ctermfg=16 ctermbg=251 cterm=NONE
-hi DiffDelete ctermfg=231 ctermbg=133 cterm=NONE

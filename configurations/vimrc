@@ -99,10 +99,10 @@ set shiftwidth=4
 set cursorline
 
 " Remove tilde characters at the end of the buffer
-set fillchars=eob:\
+" set fillchars=eob:\
 
 " Explicitly set vertical split character
-set fillchars+=vert:\|
+" set fillchars+=vert:\|
 
 colorscheme calm
 

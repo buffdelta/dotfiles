@@ -87,11 +87,14 @@ function GetLongList() {
 }
 
 if [[ $- == *i* ]]; then
-    neofetch
-    COLS=$(tput cols)
-    for ((i = 0; i < COLS; i++)); do
-        echo -n "─";
-    done
+    if command -v neofetch > /dev/null 2>&1
+    then
+        neofetch
+        COLS=$(tput cols)
+        for ((i = 0; i < COLS; i++)); do
+            echo -n "─";
+        done
+    fi
 fi
 
 # Display weather on terminal start up

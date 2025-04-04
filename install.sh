@@ -119,6 +119,9 @@ function install_extension() {
 # gitconfig
 create_symlink configurations/gitconfig .gitconfig
 
+# gitignore
+create_symlink configurations/gitignore .gitignore
+
 # bashrc
 create_symlink configurations/bashrc .bashrc
 

@@ -14,7 +14,7 @@
     untracked = red bold
 
 [core]
-    excludesFile = /home/chris/.gitignore
+    excludesFile = ~/.gitignore
     editor = vim
 
 [credential]

@@ -91,7 +91,7 @@ function GetLongList() {
 # 0 = Display current temperature
 # u = Display temperature in Fahrenheit
 if [[ $- == *i* ]]; then
-    IP=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u) > /dev/null 2>&1 & disown && neofetch
+    IP=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u) && neofetch
     COLS=$(tput cols)
     for ((i = 0; i < COLS; i++)); do
         echo -n "─";

@@ -78,33 +78,31 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll=GetLongList
+alias ll="GetLongList"
 alias la='ls -A'
 alias l='ls -CF'
 
 function GetLongList() {
-    ls -AlhFgo --group-directories-first #| sed -E '2,$s/ +[0-9]+//' | tail +2
+    ls "$@" -AlhFgo --group-directories-first | sed -E '2,$s/ +[0-9]+//' | tail +2
 }
-
-if [[ $- == *i* ]]; then
-    neofetch
-    COLS=$(tput cols)
-    for ((i = 0; i < COLS; i++)); do
-        echo -n "─";
-    done
-fi
 
 # Display weather on terminal start up
 # ? = Beginning of request
 # 0 = Display current temperature
 # u = Display temperature in Fahrenheit
-CURL_RETURN_CODE=0
-/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u || CURL_RETURN_CODE=$?
-if [ ${CURL_RETURN_CODE} == 0 ]; then
+if [[ $- == *i* ]]; then
+    IP=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u) > /dev/null 2>&1 & disown && neofetch
     COLS=$(tput cols)
     for ((i = 0; i < COLS; i++)); do
         echo -n "─";
     done
+    if [[ $IP ]]; then
+        COLS=$(tput cols)
+        echo "$IP"
+        for ((i = 0; i < COLS; i++)); do
+            echo -n "─";
+        done
+    fi
 fi
 
 function git_branch() {
@@ -136,16 +134,16 @@ PROMPT_COMMAND=make_prompt
 # https://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
 
 LS_COLORS="di=38;5;219:"  # Directory Color
-LS_COLORS+="ln=38;5;30:"     # Symlink Color
+LS_COLORS+="ln=38;5;30:"  # Symlink Color
 LS_COLORS+="mi=1;94:"     # Missing Symlink Color
 LS_COLORS+="ex=38;5;108:" # Executable Color
 export LS_COLORS
 
 # Alias for running cs454 docker container.
-alias docker-run-cs454='docker run -d --rm --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -p 8012:8012 -v /mnt/c/Users/Chris/Desktop/SPRING_2025/cs454:/home/cs454 cs454; echo JupyterNotebook running on http://localhost:8012/'
+alias docker-run-cs454='docker run -d --rm --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -p 8012:8012 -v /home/chris-linux/cs454:/home/cs454 cs454; echo JupyterNotebook running on http://localhost:8012/'
 
 # Alias file for closing all docker container.
 alias docker-stop-all='docker stop $(docker ps -a -q)'
 
-export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'
+export JAVA_HOME='/usr/lib/jvm/java-21-openjdk-amd64'
 export PATH=$JAVA_HOME/bin:$PATH

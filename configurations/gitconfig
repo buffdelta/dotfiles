@@ -16,3 +16,6 @@
 [core]
     excludesFile = /home/chris/.gitignore
     editor = vim
+
+[credential]
+    helper = cache

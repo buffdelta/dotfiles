@@ -125,6 +125,9 @@ create_symlink configurations/gitignore .gitignore
 # bashrc
 create_symlink configurations/bashrc .bashrc
 
+# bash exports file
+create_symlink configurations/bashexports.sh .bashexports.sh
+
 # neofetch
 install_extension neofetch
 create_symlink configurations/neofetch .config/neofetch

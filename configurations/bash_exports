@@ -1,4 +1,7 @@
+#!/usr/bin/env bash
+
 export EDITOR='vim'
+export LANG="en_US.UTF-8"
 
 # Colors for less
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 1) # green
@@ -24,4 +27,3 @@ LS_COLORS+="ex=38;5;108:" # Executable Color
 export LS_COLORS
 
 export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'
-export PATH=$JAVA_HOME/bin:$PATH

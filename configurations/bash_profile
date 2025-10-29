@@ -1,0 +1,12 @@
+export PATH=$HOME/bin:$PATH
+
+case "$-" in
+*i*)
+    for file in ~/.{path,bashrc,bash_aliases}; do
+        [ -r "$file" ] && [ -f "$file" ] && source "$file";
+    done;
+    ;;
+*)	    echo This shell is not interactive ;;
+esac
+
+source ~/.bash_exports

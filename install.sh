@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
 readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-PACKAGE_INSTALL_COMMAND="apt-get install"
+PACKAGE_INSTALL_COMMAND="sudo apt-get install"
+
+if [[ "$OSTYPE" == "msys" ]]; then
+    powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
+    powershell -Command "Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression"
+    export SCOOP="$HOME/scoop"
+    PACKAGE_INSTALL_COMMAND="scoop install"
+fi
+
 BACKUP_DIR_MADE=false
 
 # $1 = File location
@@ -102,7 +110,7 @@ function install_extension() {
         while true; do
             case $response in
                 [yY][eE][sS]|[yY])
-                    sudo $PACKAGE_INSTALL_COMMAND $1
+                    $PACKAGE_INSTALL_COMMAND $1
                     break
                 ;;
                 [Nn][Oo]|[Nn])
@@ -116,17 +124,16 @@ function install_extension() {
     fi
 }
 
-# gitconfig
+# GIT
 create_symlink configurations/gitconfig .gitconfig
-
-# gitignore
 create_symlink configurations/gitignore .gitignore
 
-# bashrc
+# BASH
+create_symlink configurations/bash_profile .bash_profile
 create_symlink configurations/bashrc .bashrc
-
-# bash exports file
-create_symlink configurations/bashexports.sh .bashexports.sh
+create_symlink configurations/bash_exports .bash_exports
+create_symlink configurations/bash_aliases .bash_aliases
+create_symlink configurations/bash_prompt .bash_prompt
 
 # neofetch
 install_extension neofetch

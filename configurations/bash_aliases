@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=always'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll="GetLongList"
+alias la='ls -A'
+alias l='ls -CF'
+function GetLongList() {
+    ls "$@" -AlhFgo --group-directories-first | sed -E '2,$s/ +[0-9]+//' | tail +2
+}
+

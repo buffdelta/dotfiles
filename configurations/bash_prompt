@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+function git_branch() {
+    BRANCH_COLOR=''
+    BRANCH=''
+    if git rev-parse --is-inside-work-tree &> /dev/null; then
+        BRANCH_COLOR='\[\033[0;31m\]'
+        BRANCH=$(git branch --show-current)
+        if git diff --quiet && git diff --cached --quiet; then
+            BRANCH_COLOR='\[\033[0;32m\]'
+        fi
+        if [[ -n $(git log origin/$(git branch --show-current)..HEAD --oneline) ]]; then
+            BRANCH_COLOR='\[\033[0;33m\]'
+        fi
+    fi
+}
+
+function make_prompt() {
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[38;5;108m\]\u\[\033[38;5;219m\]@\[\033[38;5;108m\]\h:\[\033[38;5;219m\]\w'
+    git_branch
+    if [ "$BRANCH" ]; then
+        PS1+="$BRANCH_COLOR (${BRANCH}) "
+    fi
+    PS1+='\[\033[0m\]\$ '
+}
+
+export PS1;
+
+PROMPT_COMMAND=make_prompt

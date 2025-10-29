@@ -7,39 +7,23 @@
 #  \____/\_| |_/\____/\_| |_/\_| \_| \____/  "
 #                                            "
 #--------------------------------------------"
+#
+# TODO check OS and set variables accordingly.
 
-source ~/.bashexports.sh
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
 HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+shopt -s cdspell;
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
@@ -52,73 +36,25 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=always'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+if which neofetch &> /dev/null; then
+    neofetch
+    for ((i = 0; i < COLS; i++)); do
+        echo -n "─";
+    done
 fi
-
-# some more ls aliases
-alias ll="GetLongList"
-alias la='ls -A'
-alias l='ls -CF'
-
-function GetLongList() {
-    ls "$@" -AlhFgo --group-directories-first | sed -E '2,$s/ +[0-9]+//' | tail +2
-}
 
 # Display weather on terminal start up
 # ? = Beginning of request
 # 0 = Display current temperature
 # u = Display temperature in Fahrenheit
-if [[ $- == *i* ]]; then
-    IP=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u) && neofetch
+IP=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u)
+COLS=$(tput cols)
+if [[ $IP ]]; then
     COLS=$(tput cols)
+    echo "$IP"
     for ((i = 0; i < COLS; i++)); do
         echo -n "─";
     done
-    if [[ $IP ]]; then
-        COLS=$(tput cols)
-        echo "$IP"
-        for ((i = 0; i < COLS; i++)); do
-            echo -n "─";
-        done
-    fi
 fi
 
-function git_branch() {
-    BRANCH_COLOR=''
-    BRANCH=''
-    if git rev-parse --is-inside-work-tree &> /dev/null; then
-        BRANCH_COLOR='\[\033[0;31m\]'
-        BRANCH=$(git branch --show-current)
-        if git diff --quiet && git diff --cached --quiet; then
-            BRANCH_COLOR='\[\033[0;32m\]'
-        fi
-        if [[ -n $(git log origin/$(git branch --show-current)..HEAD --oneline) ]]; then
-            BRANCH_COLOR='\[\033[0;33m\]'
-        fi
-    fi
-}
-
-function make_prompt() {
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[38;5;108m\]\u\[\033[38;5;219m\]@\[\033[38;5;108m\]\h:\[\033[38;5;219m\]\w'
-    git_branch
-    if [ "$BRANCH" ]; then
-        PS1+="$BRANCH_COLOR (${BRANCH}) "
-    fi
-    PS1+='\[\033[0m\]\$ '
-}
-
-PROMPT_COMMAND=make_prompt
-
-# https://askubuntu.com/questions/466198/how-do-i-change-the-color-for-directories-with-ls-in-the-console
-
-# Alias for running cs454 docker container.
-alias docker-run-cs454='docker run -d --rm --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -p 8012:8012 -v /mnt/c/Users/Chris/Desktop/SPRING_2025/cs454:/home/cs454 cs454; echo JupyterNotebook running on http://localhost:8012/'
-
-# Alias file for closing all docker container.
-alias docker-stop-all='docker stop $(docker ps -a -q)'
+source ~/.bash_prompt

@@ -1,12 +1,6 @@
 export PATH=$HOME/bin:$PATH
+export EDITOR="vim"
+export LANG="C.UTF-8"
 
-case "$-" in
-*i*)
-    for file in ~/.{path,bashrc,bash_aliases}; do
-        [ -r "$file" ] && [ -f "$file" ] && source "$file";
-    done;
-    ;;
-*)	    echo This shell is not interactive ;;
-esac
-
-source ~/.bash_exports
+# Check if the shell is interactive, if so source bashrc. Assumes existence of bashrc.
+[[ $- = *i* ]] && source ~/.bashrc

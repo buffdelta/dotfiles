@@ -28,12 +28,14 @@ function create_symlink() {
     fi
 
     while true; do
-        read -p "Would you like to link $SCRIPT_DIR/$1 -> ~/$2 [y/n]? " response
+        echo -e "Would you like to link \e[36m$SCRIPT_DIR/$1\e[0m -> \e[32m~/$2\e[0m [y/n]? "
+        read response
         case $response in
             [yY][eE][sS]|[yY])
                 if [ -f ~/$2 ] || [ -d ~/$2 ]; then
                     while true; do
-                        read -p  "~/$2 exists, do you want to delete it [y/n], or backup the file [b]? " response
+                        echo -e "\t\e[31m~/$2\e[0m exists, do you want to delete it [y/n], or backup the file [b]? "
+                        read response
                         case $response in
                             [yY][eE][sS]|[yY])
                                 rm -r -v ~/$2

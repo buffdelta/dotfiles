@@ -7,8 +7,10 @@
 #  \____/\_| |_/\____/\_| |_/\_| \_| \____/  "
 #                                            "
 #--------------------------------------------"
-#
-# TODO check OS and set variables accordingly.
+
+for file in ~/.{path,bash_aliases,bash_prompt}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -38,23 +40,16 @@ fi
 
 if which neofetch &> /dev/null; then
     neofetch
-    for ((i = 0; i < COLS; i++)); do
-        echo -n "─";
+    for ((i = 0; i < $COLUMNS; i++)); do
+        echo -n -e "-";
     done
 fi
 
-# Display weather on terminal start up
-# ? = Beginning of request
-# 0 = Display current temperature
-# u = Display temperature in Fahrenheit
-IP=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u)
-COLS=$(tput cols)
-if [[ $IP ]]; then
-    COLS=$(tput cols)
-    echo "$IP"
-    for ((i = 0; i < COLS; i++)); do
-        echo -n "─";
+# https://github.com/chubin/wttr.in
+WEATHER=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u)
+if [[ $WEATHER ]]; then
+    echo "$WEATHER"
+    for ((i = 0; i < $COLUMNS; i++)); do
+        echo -n "-";
     done
 fi
-
-source ~/.bash_prompt

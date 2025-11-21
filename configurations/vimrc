@@ -34,7 +34,7 @@ function! Get_Visual_Selection()
     " execute "! echo -e ".strings." | clip.exe"
 endfunction
 
-" Terminal accerleration
+" Terminal acceleration
 set ttyfast
 
 " Since we are using airline, this will disable prompts of which mode we are in
@@ -72,8 +72,6 @@ set incsearch
 
 " Show matching brackets when hovering over a bracket
 set showmatch
-
-" Blink every how many tenths of a second
 
 " Syntax highlighting
 syntax enable

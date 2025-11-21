@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-export EDITOR='vim'
-export LANG="en_US.UTF-8"
-
 # Colors for less
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 1) # green
 export LESS_TERMCAP_md=$(tput bold; tput setaf 108)

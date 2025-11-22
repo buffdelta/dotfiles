@@ -1,55 +1,40 @@
-#--------------------------------------------"
-#  ______  ___   _____ _   _ ______  _____   "
-#  | ___ \/ _ \ /  ___| | | || ___ \/  __ \  "
-#  | |_/ / /_\ \\ `--.| |_| || |_/ /| /  \/  "
-#  | ___ \  _  | `--. \  _  ||    / | |      "
-#  | |_/ / | | |/\__/ / | | || |\ \ | \__/\  "
-#  \____/\_| |_/\____/\_| |_/\_| \_| \____/  "
-#                                            "
-#--------------------------------------------"
+#--------------------------------------------#
+#  ______  ___   _____ _   _ ______  _____   #
+#  | ___ \/ _ \ /  ___| | | || ___ \/  __ \  #
+#  | |_/ / /_\ \\ `--.| |_| || |_/ /| /  \/  #
+#  | ___ \  _  | `--. \  _  ||    / | |      #
+#  | |_/ / | | |/\__/ / | | || |\ \ | \__/\  #
+#  \____/\_| |_/\____/\_| |_/\_| \_| \____/  #
+#                                            #
+#--------------------------------------------#
 
-for file in ~/.{path,bash_aliases,bash_prompt}; do
+# Source aliases and the prompt
+for file in ~/.{bash_aliases,bash_prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-HISTCONTROL=ignoreboth
-shopt -s histappend
-shopt -s cdspell;
-HISTSIZE=1000
-HISTFILESIZE=2000
 
-shopt -s checkwinsize
-
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
-fi
-
+# Print Neofetch and weather, with bottom border bars
 if which neofetch &> /dev/null; then
     neofetch
-    for ((i = 0; i < $COLUMNS; i++)); do
-        echo -n -e "-";
-    done
+    printf '%*s\n' "$COLUMNS" '' | tr ' ' '-'
 fi
-
 # https://github.com/chubin/wttr.in
 WEATHER=$(/usr/bin/timeout --preserve-status 1.0 curl -s -f wttr.in/?0u)
 if [[ $WEATHER ]]; then
     echo "$WEATHER"
-    for ((i = 0; i < $COLUMNS; i++)); do
-        echo -n "-";
-    done
+    printf '%*s\n' "$COLUMNS" '' | tr ' ' '-'
 fi
+
+
+# History options
+HISTCONTROL=ignoredups  # Ignore duplicate commands
+HISTSIZE=1000
+HISTFILESIZE=1000
+
+
+# Shell options
+shopt -s histappend     # Append to the history, not overwrite
+shopt -s cdspell        # Fixes minor spelling mistakes on tab
+shopt -s direxpand      # Expands directory names on tab
+shopt -s dirspell       # Fixes minor spelling mistakes on tab

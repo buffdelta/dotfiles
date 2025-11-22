@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Dynamic git, color is based on status.  
 function git_branch() {
     BRANCH_COLOR=''
     BRANCH=''
@@ -15,6 +16,8 @@ function git_branch() {
     fi
 }
 
+
+# Makes the prompt by editing PS1
 function make_prompt() {
     PS1='${debian_chroot:+($debian_chroot)}\[\033[38;5;108m\]\u\[\033[38;5;219m\]@\[\033[38;5;108m\]\h:\[\033[38;5;219m\]\w'
     git_branch

@@ -1,6 +1,6 @@
-export PATH=$HOME/bin:$PATH
+export PATH="$HOME/bin:$PATH"
 export EDITOR="vim"
 export LANG="C.UTF-8"
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
-# Check if the shell is interactive, if so source bashrc. Assumes existence of bashrc.
-[[ $- = *i* ]] && source ~/.bashrc
+[[ $- = *i* ]] && source ~/.bashrc # Check if the shell is interactive, if so source bashrc. Assumes existence of bashrc.

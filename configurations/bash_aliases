@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Set colors for some commands
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=always'
@@ -8,11 +9,12 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll="GetLongList"
-alias la='ls -A'
-alias l='ls -CF'
-function GetLongList() {
+# Human readable, directories first, hides extra info
+function get_long_list() {
     ls "$@" -AlhFgo --group-directories-first | sed -E '2,$s/ +[0-9]+//' | tail +2
 }
 
+# ls aliases
+alias ll="get_long_list"
+alias la='ls -A'
+alias l='ls -CF'

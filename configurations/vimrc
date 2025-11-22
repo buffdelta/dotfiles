@@ -8,109 +8,8 @@
 "                                      "
 "--------------------------------------"
 
-set hidden
-
-" Map keyboard combo, left-control, w, t to create a new terminal window
-map <C-w>t :tab terminal<CR>
-
-nnoremap <M-Left> <C-O>
-nnoremap <M-Right> <C-I>
-
-" Copy to clipboard
-vnoremap <C-y> :call Get_Visual_Selection()<CR>
-
-" https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
-function! Get_Visual_Selection()
-    " Why is this not a built-in Vim script function?!
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-        return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    echo strings 
-    " execute "! echo -e ".strings." | clip.exe"
-endfunction
-
-" Terminal acceleration
-set ttyfast
-
-" Since we are using airline, this will disable prompts of which mode we are in
-set noshowmode
-
-" Backspace over everything
-set backspace=indent,eol,start
-
-" Show the title
-set title
-
-" Current line is current line number, the rest of the line numbers are relative to it
-set number relativenumber
-
-" Make number column default a width two
-set numberwidth=2
-
-" Display a list of possible commands/attributes when tab is pressed
-set wildmenu
-
-" Always show current position
-set ruler
-
-" Ignore case while searching
-set ignorecase
-
-" Be smart about cases when searching
-set smartcase
-
-" Highlist search hits
-set hlsearch
-
-" Search similar to browsers
-set incsearch
-
-" Show matching brackets when hovering over a bracket
-set showmatch
-
-" Syntax highlighting
-syntax enable
-
-" Auto indent
-set autoindent
-" Smart indent
-set smartindent
-
-" Wrap lines
-set nowrap
-
-" Coverts tabs into spaces
-set expandtab
-
-" How long is tab
-set tabstop=4
-
-" How long is Shift-<, or Shift->
-set shiftwidth=4
-
-" Highlight current line/line-number
-set cursorline
-
-" Remove tilde characters at the end of the buffer
-" set fillchars=eob:\
-
-" Explicitly set vertical split character
-" set fillchars+=vert:\|
-
+" Color Customization
 colorscheme calm
-
-" Hide *.swp files in Netrw
-let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$'
-
-" Always show status line
-set laststatus=2
-
-set virtualedit=onemore
 
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -125,6 +24,48 @@ autocmd Filetype markdown setlocal spell
 autocmd Filetype html syn keyword htmlCommentTodo TODO FIXME XXX containedin=htmlComment contained
 autocmd Filetype html hi def link htmlCommentTodo Todo
 
+
+" Vim options
+set hidden                      " Can switch buffers without saving
+
+map <C-w>t :tab terminal<CR>
+nnoremap <M-Left> <C-O>
+nnoremap <M-Right> <C-I>
+
+set ttyfast                     " Terminal acceleration
+
+set noshowmode                  " Since we are using airline, this will disable prompts of which mode we are in
+set backspace=indent,eol,start  " Backspace over everything
+
+set number relativenumber       " Current line is current line number, the rest of the line numbers are relative to it
+set numberwidth=2               " Make number column default a width two
+
+set wildmenu                    " Display a list of possible commands/attributes when tab is pressed
+
+set cursorline                  " Highlight current line/line-number
+
+set ignorecase                  " Ignore case while searching
+set smartcase                   " Be smart about cases when searching
+set hlsearch                    " Highlight search hits
+set incsearch                   " Search similar to browsers
+
+set showmatch                   " Show matching brackets when hovering over a bracket
+
+set autoindent                  " Auto indent
+set smartindent                 " Smart indent
+
+set nowrap                      " Wrap lines
+
+set expandtab                   " Coverts tabs into spaces
+set tabstop=4                   " How long is tab
+set shiftwidth=4                " How long is Shift<-, or Shift->
+
+set laststatus=2                " Always show status line
+
+let g:netrw_list_hide= '.*\.swp$,.DS_Store,*/tmp/*,*.so,*.swp,*.zip,*.git,^\.\.\=/\=$' " Hide *.swp files in Netrw
+
+
+" Display highlight group on cursor
 function! SynStack()
   if !exists("*synstack")
     return
